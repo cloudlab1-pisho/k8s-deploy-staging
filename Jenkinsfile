@@ -63,7 +63,13 @@ pipeline {
     }
   
     
-    
+    stage('Warmup the fire my dudes'){
+      steps{
+        container('kubectl'){
+          sh "kubectl rollout status deployment carts-v1 -n production"
+        }
+      }
+    }
     
   
     stage('Run production ready e2e check in staging') {
